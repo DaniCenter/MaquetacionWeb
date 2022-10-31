@@ -14,9 +14,6 @@ body {
   font-family: "Quicksand", sans-serif;
 }
 
-.inactive {
-  display: none;
-}
 nav {
   display: flex;
   justify-content: space-between;
@@ -80,10 +77,46 @@ nav {
   display: grid;
   place-content: center;
 }
+
+.mobile-menu {
+  position: absolute;
+  top: 61px;
+  left: 30px;
+  transition: 150ms;
+}
+.mobile-menu a {
+  text-decoration: none;
+  color: var(--black);
+  font-weight: bold;
+}
+.mobile-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0 0;
+}
+.mobile-menu ul:nth-child(1) {
+  border-bottom: 1px solid var(--very-light-pink);
+}
+.mobile-menu ul li {
+  margin-bottom: 24px;
+}
+.mobile-menu .email {
+  font-size: var(--sm);
+  font-weight: 300;
+}
+.mobile-menu .sign-out {
+  color: var(--hospital-green);
+  font-size: var(--sm);
+}
+.mobile-menu ul:nth-child(3) {
+  bottom: 0;
+}
+
 .desktop-menu {
   position: absolute;
   top: 49px;
   right: 39px;
+  transition: 150ms;
   background-color: var(--white);
   width: 100px;
   height: auto;
@@ -123,4 +156,19 @@ nav {
   .navbar-email {
     display: none;
   }
+  .desktop-menu {
+    display: none;
+  }
+}
+@media (min-width: 641px) {
+  .mobile-menu {
+    display: none;
+  }
+  .inactive {
+    opacity: 0;
+  }
+}
+
+.inactive {
+  left: -140px;
 }

@@ -1,7 +1,11 @@
 const navEmail = document.querySelector(".navbar-email");
 const dektopMenu = document.querySelector(".desktop-menu");
+const menuHamIcon = document.querySelector(".menu");
+const mobileMenu = document.querySelector(".mobile-menu");
 
-navEmail.addEventListener("click", toggleDesktopMenu);
-function toggleDesktopMenu() {
-  dektopMenu.classList.toggle("inactive");
+function toggle(element) {
+  element.classList.toggle("inactive");
 }
+
+navEmail.addEventListener("click", () => toggle(dektopMenu));
+menuHamIcon.addEventListener("click", () => toggle(mobileMenu));

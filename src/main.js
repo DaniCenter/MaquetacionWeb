@@ -64,7 +64,7 @@ function renderProducs(arr) {
     productInfo.classList.add("product-info");
     productPrice.innerText = `\$${product.price}`;
     productName.innerText = `${product.name}`;
-    productInfoCart.setAttribute("src", "Platzi_YardSale_Icons/bt_add_to_cart.svg");
+    productInfoCart.setAttribute("src", "/Platzi_YardSale_Icons/bt_add_to_cart.svg");
 
     productInfoFigure.appendChild(productInfoCart);
     productInfoDiv.append(productPrice, productName);

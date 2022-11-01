@@ -8,35 +8,43 @@ const productList = [];
 const cardsContainer = document.querySelector(".cards-container");
 productList.push({
   name: "Bike",
-  price: 12700,
+  price: 200,
   image: "https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
 });
 productList.push({
-  name: "Bike",
-  price: 12700,
-  image: "https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  name: "Laptop",
+  price: 300,
+  image:
+    "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
 });
 productList.push({
-  name: "Bike",
-  price: 12700,
-  image: "https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  name: "Helmet",
+  price: 50,
+  image:
+    "https://images.unsplash.com/photo-1623101598030-0d3738589f10?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
 });
 productList.push({
-  name: "Bike",
-  price: 12700,
-  image: "https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  name: "Headphones",
+  price: 20,
+  image:
+    "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
 });
 productList.push({
-  name: "Bike",
-  price: 12700,
-  image: "https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  name: "Mask",
+  price: 5,
+  image:
+    "https://images.unsplash.com/photo-1584634731339-252c581abfc5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1475&q=80",
 });
+const asideSecondary = document.querySelector(".product-detail-secondary");
+const closeAsisdeSecondary = document.querySelector(".product-detail-close");
+const pInformations = document.querySelectorAll(".product-info-secondary > p");
+const imgInformation = document.querySelector(".product-detail-secondary > img");
 
-function toggle(element, element2) {
+function toggle(element, ...args) {
   element.classList.toggle("inactive");
-
-  if (element2 && !element2.classList.contains("inactive")) {
-    element2.classList.toggle("inactive");
+  const arrayDeactivate = [...args];
+  for (const element of arrayDeactivate) {
+    element.classList.add("inactive");
   }
 }
 function renderProducs(arr) {
@@ -52,10 +60,11 @@ function renderProducs(arr) {
 
     productCard.classList.add("product-card");
     img.setAttribute("src", product.image);
+    img.setAttribute("onclick", "viewDetail(this)");
     productInfo.classList.add("product-info");
     productPrice.innerText = `\$${product.price}`;
     productName.innerText = `${product.name}`;
-    productCard.setAttribute("src", "Platzi_YardSale_Icons/bt_add_to_cart.svg");
+    productInfoCart.setAttribute("src", "Platzi_YardSale_Icons/bt_add_to_cart.svg");
 
     productInfoFigure.appendChild(productInfoCart);
     productInfoDiv.append(productPrice, productName);
@@ -65,12 +74,18 @@ function renderProducs(arr) {
     cardsContainer.appendChild(productCard);
   }
 }
-
-navEmail.addEventListener("click", () => toggle(dektopMenu, aside));
-menuHamIcon.addEventListener("click", () => toggle(mobileMenu, aside));
-if (window.matchMedia("(min-width: 641px)").matches) {
-  menuCarritoIcon.addEventListener("click", () => toggle(aside, dektopMenu));
-} else {
-  menuCarritoIcon.addEventListener("click", () => toggle(aside, mobileMenu));
+function viewDetail(element) {
+  const arrayInfo = element.nextElementSibling.childNodes[0].childNodes;
+  pInformations[0].innerText = arrayInfo[0].innerText;
+  pInformations[1].innerText = arrayInfo[1].innerText;
+  imgInformation.setAttribute("src", element.src);
+  if (asideSecondary.classList.contains("inactive")) {
+    toggle(asideSecondary);
+  }
 }
+
+navEmail.addEventListener("click", () => toggle(dektopMenu, aside, asideSecondary));
+menuHamIcon.addEventListener("click", () => toggle(mobileMenu, aside, asideSecondary));
+menuCarritoIcon.addEventListener("click", () => toggle(aside, dektopMenu, mobileMenu, asideSecondary));
+closeAsisdeSecondary.addEventListener("click", () => toggle(asideSecondary, aside, dektopMenu));
 renderProducs(productList);

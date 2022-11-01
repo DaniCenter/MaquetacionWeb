@@ -238,9 +238,10 @@ nav {
 }
 .product-card > img {
   width: inherit;
-  height: inherit;
+  height: 160px;
   border-radius: 20px;
   object-fit: cover;
+  cursor: pointer;
 }
 .product-info {
   display: flex;
@@ -339,7 +340,7 @@ figure > img {
   }
   .product-card > img {
     width: inherit;
-    height: inherit;
+    height: 93px;
     border-radius: 20px;
     object-fit: cover;
   }
